@@ -3,22 +3,24 @@ import { DotsVerticalIcon, PencilIcon } from '@heroicons/react/outline'
 import { PlusIcon, CheckCircleIcon } from '@heroicons/react/outline'
 import { useRecoilState } from 'recoil'
 import { modalStateforTask } from '../atoms/modalAtom2'
-import { db } from '../firebase'
+import { auth, db } from '../firebase'
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
 import Done from './Done'
 import { modalState } from '../atoms/modalAtom'
 import { modalTask } from '../atoms/modalTask'
 import { modalTaskListid } from '../atoms/modalTaskListid'
+import { useAuthState } from 'react-firebase-hooks/auth'
 function TasksBoard({ caption, details, time, idi }) {
   const [open, setOpen] = useRecoilState(modalStateforTask)
   const [openEdit, setOpenEdit] = useRecoilState(modalState)
   const [taska, setTaska] = useRecoilState(modalTask)
   const [taskListId, settaskListId] = useRecoilState(modalTaskListid)
+  const [user,loading]=useAuthState(auth) 
   const [tasks, setTasks] = useState([])
   useEffect(() => {
     const unsubscribe = onSnapshot(
       query(
-        collection(db, `users/${'Cyril'}`, 'taskList', idi, 'tasks'),
+        collection(db, `users/${user.email}`, 'taskList', idi, 'tasks'),
         orderBy('timestamp', 'desc')
       ),
       (snapshot) => {
@@ -61,12 +63,12 @@ function TasksBoard({ caption, details, time, idi }) {
           <div key={id} className="flex flex-col justify-between pt-5">
             <div className="flex justify-between p-3">
               <Done />
-              <div className="flex flex-col justify-between">
+              <div className="flex flex-col justify-evenly">
                 <p className='w-full break-all'>{data.taskName}</p>
-                <span className="w-1/2 break-all text-[11px]">
+                <span className=" break-all text-[11px]">
                   {data?.details}
                 </span>
-                <span className="w-1/2 bg-gray-300 text-center text-xs">
+                <span className=" bg-gray-300 text-center text-xs">
                   {data?.date}
                 </span>
               </div>

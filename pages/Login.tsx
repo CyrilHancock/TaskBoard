@@ -4,8 +4,8 @@ import React, { useRef } from 'react'
 import { auth } from '../firebase';
 
 function Login() {
-  const email=useRef("")
-  const password=useRef("")  
+  const email=useRef()
+  const password=useRef()  
   const router=useRouter()
   function login(){
     signInWithEmailAndPassword(auth, email.current.value, password.current.value)

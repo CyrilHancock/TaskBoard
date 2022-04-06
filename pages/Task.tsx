@@ -14,7 +14,7 @@ function Task() {
   const [open,setOpen]=useRecoilState(modalAdd)
    const [taskLists,setTaskList]=useState([])
     useEffect(() => {
-      const unsubscribe=onSnapshot(query(collection(db,"users","Cyril","taskList"),orderBy("timestamp","desc")),snapshot=>{
+      const unsubscribe=onSnapshot(query(collection(db,"users",user.email,"taskList"),orderBy("timestamp","desc")),snapshot=>{
         setTaskList(snapshot.docs)
       })
       return ()=>{
@@ -24,7 +24,7 @@ function Task() {
     useEffect(() => {
    setImgUrl(`https://picsum.photos/id/${Math.floor(Math.random()*1000)}/300/300`)   
     }, [])
-    console.log(imgUrl)
+    
     
   return (
     <div className='relative'>
@@ -51,7 +51,7 @@ function Task() {
         </div>  
 
         <div className='absolute right-16 bottom-[50px] cursor-pointer '>
-        <PlusIcon onClick={()=>setOpen(true)} className='h-20 bg-blue-600 rounded-full text-white cursor-pointer'/>
+        <PlusIcon type='submit' onClick={()=>setOpen(true)} className='h-20 bg-blue-600 rounded-full text-white cursor-pointer'/>
         </div>
 
     </div>

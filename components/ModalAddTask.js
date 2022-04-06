@@ -3,7 +3,7 @@ import { useRecoilState } from 'recoil'
 import { modalStateforTask } from '../atoms/modalAtom2'
 import { Dialog, Transition } from '@headlessui/react'
 import { CameraIcon } from '@heroicons/react/outline'
-import { db, storage } from '../firebase'
+import { auth, db, storage } from '../firebase'
 import {
   addDoc,
   collection,
@@ -13,15 +13,17 @@ import {
 } from 'firebase/firestore'
 import { ref, getDownloadURL, uploadString } from 'firebase/storage'
 import {modalTaskListid} from "../atoms/modalTaskListid"
+import { useAuthState } from 'react-firebase-hooks/auth'
 
 const Modal = () => {
   const [open, setOpen] = useRecoilState(modalStateforTask)
   const [taskListId,settaskListId]=useRecoilState(modalTaskListid)
+  const [user,loading]=useAuthState(auth) 
 
 const taskRef=useRef()
 async function addTask(){
-    const docRef = await addDoc(collection(db,`users/${"Cyril"}`,"taskList",taskListId,"tasks"), {
-        username: "Cyril Hancock",
+    const docRef = await addDoc(collection(db,`users/${user.email}`,"taskList",taskListId,"tasks"), {
+        username: user.email,
         taskName: taskRef.current.value,
         timestamp: serverTimestamp(),
       })

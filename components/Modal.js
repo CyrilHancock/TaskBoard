@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useRef, useState } from 'react'
 import { useRecoilState } from 'recoil'
 import { modalState } from '../atoms/modalAtom'
 import { Dialog, Transition } from '@headlessui/react'
-import { db, storage } from '../firebase'
+import { auth, db, storage } from '../firebase'
 import {
   addDoc,
   collection,
@@ -18,6 +18,7 @@ import {
 import { ref, getDownloadURL, uploadString } from 'firebase/storage'
 import { modalTask } from '../atoms/modalTask'
 import { modalTaskListid } from '../atoms/modalTaskListid'
+import { useAuthState } from 'react-firebase-hooks/auth'
 
 const Modal = () => {
   const [open, setOpen] = useRecoilState(modalState)
@@ -27,9 +28,11 @@ const Modal = () => {
   const taskRef = useRef()
   const detailsRef = useRef()
   const timeRef = useRef()
+  const [user,loading]=useAuthState(auth) 
+
   const [name, setname] = useState()
   async function update() {
-    const washingtonRef = doc(db, `users/${'Cyril'}/taskList/${taskListId}`, "tasks",taska);
+    const washingtonRef = doc(db, `users/${user.email}/taskList/${taskListId}`, "tasks",taska);
 
     const docRef = await updateDoc(
       washingtonRef,
