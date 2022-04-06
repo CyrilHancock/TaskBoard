@@ -1,14 +1,15 @@
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useRouter } from 'next/router';
+import { text } from 'node:stream/consumers';
 import React, { useRef } from 'react'
 import { auth } from '../firebase';
 
 function Login() {
-  const email=useRef()
-  const password=useRef()  
+  const emailRef=useRef<any>()
+  const passwordRef=useRef<any>(null)  
   const router=useRouter()
-  function login(){
-    signInWithEmailAndPassword(auth, email?.current?.value, password?.current?.value)
+  const loginIn=()=>{
+    signInWithEmailAndPassword(auth,emailRef?.current?.value, passwordRef?.current?.value)
   .then((userCredential) => {
     // Signed in 
     const user = userCredential.user;
@@ -27,8 +28,14 @@ function Login() {
             Log in!
         </h1>
         <form className='flex flex-col space-y-5 w-1/3'>
-            <input ref={email} className='h-12 outline-none border border-white bg-inherit'placeholder='Enter E-mail' type="text"/>
-            <input ref={password} className='h-12 outline-none border border-white bg-inherit'placeholder='Enter Password'type="password"/>
+            <input ref={emailRef} 
+            className='h-12 outline-none border border-white bg-inherit' 
+            placeholder='Enter E-mail' 
+            type="text"/>
+            <input 
+            ref={passwordRef} 
+            className='h-12 outline-none border border-white bg-inherit' 
+            placeholder='Enter Password'type="password"/>
         
         <div className='flex pb-10'>
         <div className='flex flex-row flex-1'>
@@ -39,8 +46,8 @@ function Login() {
 
         </div>
 
+        <button onClick={loginIn}   className='bg-white text-blue-600 pt-4 pb-4 font-bold w-1/5'>Login</button>
         </form>
-        <button onClick={()=>login()} className='bg-white text-blue-600 pt-4 pb-4 font-bold w-1/5'>Login</button>
 
     </div>
   )

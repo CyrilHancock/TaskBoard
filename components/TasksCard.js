@@ -10,7 +10,8 @@ import { modalState } from '../atoms/modalAtom'
 import { modalTask } from '../atoms/modalTask'
 import { modalTaskListid } from '../atoms/modalTaskListid'
 import { useAuthState } from 'react-firebase-hooks/auth'
-function TasksBoard({ caption, details, time, idi }) {
+import { modalAdd } from '../atoms/modalAdd'
+function TasksBoard({ caption, idi }) {
   const [open, setOpen] = useRecoilState(modalStateforTask)
   const [openEdit, setOpenEdit] = useRecoilState(modalState)
   const [taska, setTaska] = useRecoilState(modalTask)

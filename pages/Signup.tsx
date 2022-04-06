@@ -3,11 +3,11 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import {auth} from "../firebase"
 import { useRouter } from 'next/router';
 function Signup() {
-  const emailRef=useRef()
-  const password=useRef()  
+  const emailRef=useRef<any>(null)
+  const passwordRef=useRef<any>(null)  
                   const router=useRouter()
   function signup(){
-    createUserWithEmailAndPassword(auth,emailRef?.current?.value, password?.current?.value)
+    createUserWithEmailAndPassword(auth,emailRef?.current?.value, passwordRef?.current?.value)
     .then((userCredential) => {
       // Signed in 
       // ...
@@ -28,7 +28,7 @@ function Signup() {
     <form className='flex flex-col space-y-6 w-1/3'>
     <input className='h-14 outline-none border border-white bg-inherit'placeholder='Enter Username' type="text"/>
         <input ref={emailRef} className='h-14 outline-none  border  border-white bg-inherit'placeholder='Enter E-mail' type="email"/>
-        <input ref={password} className='h-14 outline-none border border-white bg-inherit'placeholder='Enter Password'type="password"/>
+        <input ref={passwordRef} className='h-14 outline-none border border-white bg-inherit'placeholder='Enter Password'type="password"/>
     
     <div className='flex pb-10'>
      <input type="checkbox"/><p className='text-xs cursor-pointer'>
