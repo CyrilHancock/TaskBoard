@@ -4,8 +4,8 @@ import React, { useRef } from 'react'
 import { auth } from '../firebase';
 
 function Login() {
-  const email=useRef(null)
-  const password=useRef(null)  
+  const email=useRef("")
+  const password=useRef("")  
   const router=useRouter()
   function login(){
     signInWithEmailAndPassword(auth, email.current.value, password.current.value)
@@ -28,7 +28,7 @@ function Login() {
         </h1>
         <form className='flex flex-col space-y-5 w-1/3'>
             <input ref={email} className='h-12 outline-none border border-white bg-inherit'placeholder='Enter E-mail' type="text"/>
-            <input ref={password} className='h-12 outline-none border border-white bg-inherit'placeholder='Enter Password'type="text"/>
+            <input ref={password} className='h-12 outline-none border border-white bg-inherit'placeholder='Enter Password'type="password"/>
         
         <div className='flex pb-10'>
         <div className='flex flex-row flex-1'>

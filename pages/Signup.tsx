@@ -3,8 +3,8 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import {auth} from "../firebase"
 import { useRouter } from 'next/router';
 function Signup() {
-  const email=useRef(null)
-  const password=useRef(null)  
+  const email=useRef("")
+  const password=useRef("")  
                   const router=useRouter()
   function signup(){
     createUserWithEmailAndPassword(auth,email.current.value, password.current.value)
