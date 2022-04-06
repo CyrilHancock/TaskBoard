@@ -46,8 +46,8 @@ function Login() {
 
         </div>
 
-        <button onClick={loginIn}   className='bg-white text-blue-600 pt-4 pb-4 font-bold w-1/5'>Login</button>
         </form>
+        <button onClick={loginIn}   className='bg-white text-blue-600 pt-4 pb-4 font-bold w-1/5'>Login</button>
 
     </div>
   )

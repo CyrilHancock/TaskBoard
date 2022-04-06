@@ -53,7 +53,7 @@ console.log(taskLists)
 
       </div>
 
-      <div className='absolute right-16 bottom-[50px] cursor-pointer '>
+      <div className='absolute right-[100px] bottom-[50px] cursor-pointer border border-white rounded-full'>
         <PlusIcon type='submit' onClick={() => setOpen(true)} className='h-20 bg-blue-600 rounded-full text-white cursor-pointer' />
       </div>
 
