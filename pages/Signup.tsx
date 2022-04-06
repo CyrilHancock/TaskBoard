@@ -7,7 +7,7 @@ function Signup() {
   const password=useRef()  
                   const router=useRouter()
   function signup(){
-    createUserWithEmailAndPassword(auth,emailRef.current.value, password.current.value)
+    createUserWithEmailAndPassword(auth,emailRef?.current?.value, password?.current?.value)
     .then((userCredential) => {
       // Signed in 
       // ...

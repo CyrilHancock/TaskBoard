@@ -14,8 +14,8 @@ function Task() {
   const [open,setOpen]=useRecoilState(modalAdd)
    const [taskLists,setTaskList]=useState([])
     useEffect(() => {
-      const unsubscribe=onSnapshot(query(collection(db,"users",user.email,"taskList"),orderBy("timestamp","desc")),snapshot=>{
-        setTaskList(snapshot.docs)
+      const unsubscribe=onSnapshot(query(collection(db,"users",user?.email,"taskList"),orderBy("timestamp","desc")),snapshot=>{
+        setTaskList(snapshot?.docs)
       })
       return ()=>{
         unsubscribe();
@@ -39,7 +39,7 @@ function Task() {
         <div className='px-5 my-10 sm:grid md:grid-cols-2 xl:grid-cols-3  3xl:flex flex-wrap justify-center'>
             {
                 taskLists.map(taskList=>(
-                  <TasksCard idi={taskList.id} caption={taskList.data().taskListName}/>
+                  <TasksCard idi={taskList?.id} caption={taskList?.data()?.taskListName}/>
 
                 ))
             }

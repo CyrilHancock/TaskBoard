@@ -8,7 +8,7 @@ function Login() {
   const password=useRef()  
   const router=useRouter()
   function login(){
-    signInWithEmailAndPassword(auth, email.current.value, password.current.value)
+    signInWithEmailAndPassword(auth, email?.current?.value, password?.current?.value)
   .then((userCredential) => {
     // Signed in 
     const user = userCredential.user;
